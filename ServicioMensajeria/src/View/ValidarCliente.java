@@ -1,6 +1,9 @@
 package View;
 
 import static javax.swing.JOptionPane.showMessageDialog;
+import Controller.SGMU;//Obligatorio
+import Util.SMException;//Obligatorio
+import javax.swing.JOptionPane;//Obligatorio
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,7 +15,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author DogMey
  */
 public class ValidarCliente extends javax.swing.JFrame {
-
+    private SGMU sgmu;//Obligatorio
     public String getTipdoc() {
         return tipdoc;
     }
@@ -37,6 +40,7 @@ public class ValidarCliente extends javax.swing.JFrame {
     
     public ValidarCliente() {
         initComponents();
+        sgmu = new SGMU();//Obligatorio
     }
 
     /**
@@ -192,11 +196,16 @@ public class ValidarCliente extends javax.swing.JFrame {
                 this.setTipdoc("TI");
             }
             System.out.println(tipdoc);
-            this.setTipdoc(t_tipdoc.getSelectedItem().toString());
-            this.setNumdoc(t_numdoc.getText());
-            RegistrarServicio regis_servicio = new RegistrarServicio();
-            regis_servicio.setVisible(true);
-            this.setVisible(false);
+            try {
+                this.setTipdoc(t_tipdoc.getSelectedItem().toString());
+                this.setNumdoc(t_numdoc.getText());
+                RegistrarServicio regis_servicio = new RegistrarServicio();
+                regis_servicio.setVisible(true);
+                this.setVisible(false);
+                sgmu.validarCliente(this.getTipdoc(), this.getNumdoc());
+            } catch (SMException f) {
+              JOptionPane.showMessageDialog(null, f, "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_b_aceptarActionPerformed
 
