@@ -85,7 +85,7 @@ public class SGMU {
             return false;
         }
     }
-    
+    /*
     public boolean registrarServicio(String tipopaquete, String fservicio, String h_inicio, String cpostal){
         servicio = new Servicio();
         servicio.setTipopaquete(tipopaquete);
@@ -94,7 +94,7 @@ public class SGMU {
         servicio.setCpostal(cpostal);
         servicio.setTipdocc(SesionController.getK_tipdoc());
         servicio.setNumdocc(SesionController.getK_numdoc());
-        boolean result = servicioDAO.registrarServicio(servicio);
+        //boolean result = servicioDAO.registrarServicio(servicio);
         
         if(result == true){
             Servicio.setKservicio(0);
@@ -105,12 +105,12 @@ public class SGMU {
             return false;
         }
     }
-    
-    public boolean registrarIndicacion(String direccioni, String descripcion){
+    */
+    /*public boolean registrarIndicacion(String direccioni, String descripcion){
         servicio = new Servicio();
         servicio.setDirecccioni(direccioni);
         servicio.setDescripcioni(descripcion);
         boolean result = servicioDAO.registrarIndicacion(servicio);
         return result == true;
-    }
+    }*/
 }

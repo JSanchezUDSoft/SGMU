@@ -60,7 +60,6 @@ public class ValidarCliente extends javax.swing.JFrame {
         t_numdoc = new javax.swing.JTextField();
         b_aceptar = new javax.swing.JButton();
         b_volver = new javax.swing.JButton();
-        b_registrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(null);
@@ -108,15 +107,6 @@ public class ValidarCliente extends javax.swing.JFrame {
             }
         });
 
-        b_registrar.setBackground(new java.awt.Color(255, 255, 0));
-        b_registrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        b_registrar.setText("REGISTRESE");
-        b_registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_registrarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,19 +120,16 @@ public class ValidarCliente extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(128, 128, 128)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel2))
-                                .addGap(25, 25, 25)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(t_tipdoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_numdoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(b_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(b_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel2))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(t_tipdoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(t_numdoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addComponent(b_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -164,9 +151,7 @@ public class ValidarCliente extends javax.swing.JFrame {
                     .addComponent(t_numdoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(b_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(b_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -185,28 +170,27 @@ public class ValidarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void b_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_aceptarActionPerformed
-        if(t_numdoc.getText().equals("")){
-            showMessageDialog(null, "Numero de documento no especificado");
-        }else{
-            if(t_tipdoc.getSelectedItem().toString().equals("Cedula de Ciudadanía")){
-                this.setTipdoc("CC");
-            }else if(t_tipdoc.getSelectedItem().toString().equals("Cedula de extranjería")){
-                this.setTipdoc("CE");
+        try {
+            if(t_numdoc.getText().equals("")){
+                showMessageDialog(null, "Numero de documento no especificado");
             }else{
-                this.setTipdoc("TI");
-            }
-            System.out.println(tipdoc);
-            try {
-                this.setTipdoc(t_tipdoc.getSelectedItem().toString());
+                if(t_tipdoc.getSelectedItem().toString().equals("Cedula de Ciudadanía")){
+                    this.setTipdoc("CC");
+                }else if(t_tipdoc.getSelectedItem().toString().equals("Cedula de extranjería")){
+                    this.setTipdoc("CE");
+                }else{
+                    this.setTipdoc("TI");
+                }
+            
                 this.setNumdoc(t_numdoc.getText());
-                RegistrarServicio regis_servicio = new RegistrarServicio();
-                regis_servicio.setVisible(true);
-                this.setVisible(false);
+            
                 sgmu.validarCliente(this.getTipdoc(), this.getNumdoc());
+                this.setVisible(false);
+                }
             } catch (SMException f) {
               JOptionPane.showMessageDialog(null, f, "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
+        
     }//GEN-LAST:event_b_aceptarActionPerformed
 
     private void b_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_volverActionPerformed
@@ -215,12 +199,6 @@ public class ValidarCliente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_b_volverActionPerformed
 
-    private void b_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_registrarActionPerformed
-        RegistrarCliente regis_cliente = new RegistrarCliente();
-        regis_cliente.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_b_registrarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -228,7 +206,6 @@ public class ValidarCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_aceptar;
-    private javax.swing.JButton b_registrar;
     private javax.swing.JButton b_volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
