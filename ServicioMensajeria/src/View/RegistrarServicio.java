@@ -293,8 +293,16 @@ public class RegistrarServicio extends javax.swing.JFrame {
         }else if(t_fecha.getDate().before(localdate) || t_fecha.getDate().equals(localdate)){
             System.out.println(t_fecha.getDate()+" "+localdate);
             showMessageDialog(null, "Fecha erronea");
-        }else{   
-            this.setPaquete(t_paquete.getSelectedItem().toString());
+        }else{
+            if(t_paquete.getSelectedItem().toString().equals("Sobre")){
+                    this.setPaquete("S");
+            }else if(t_paquete.getSelectedItem().toString().equals("Paquete Pequeño")){
+                    this.setPaquete("PP");
+            }else if(t_paquete.getSelectedItem().toString().equals("Paquete Mediano")){
+                    this.setPaquete("PM");
+            }else if(t_paquete.getSelectedItem().toString().equals("Paquete Grande")){
+                this.setPaquete("PG");
+            }
             Date date = t_fecha.getDate();
             this.setFecha(date.getTime());
             System.out.println(t_fecha.getDate());
