@@ -294,6 +294,7 @@ public class RegistrarServicio extends javax.swing.JFrame {
             System.out.println(t_fecha.getDate()+" "+localdate);
             showMessageDialog(null, "Fecha erronea");
         }else{
+            
             if(t_paquete.getSelectedItem().toString().equals("Sobre")){
                     this.setPaquete("S");
             }else if(t_paquete.getSelectedItem().toString().equals("Paquete Pequeño")){
