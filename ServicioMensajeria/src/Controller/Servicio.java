@@ -1,9 +1,11 @@
 package Controller;
 
+import java.util.Date;
+
 public class Servicio {
     private static long    kservicio;
     private String         tipopaquete;
-    private String         fservicio;
+    private long           fservicio;
     private String         h_inicio;
     //private String iservicio;
     private String         cpostal;
@@ -36,11 +38,11 @@ public class Servicio {
         this.tipopaquete = tipopaquete;
     }
 
-    public String getFservicio() {
+    public long getFservicio() {
         return fservicio;
     }
 
-    public void setFservicio(String fservicio) {
+    public void setFservicio(long fservicio) {
         this.fservicio = fservicio;
     }
 

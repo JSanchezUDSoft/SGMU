@@ -13,7 +13,7 @@ import Model.*;
 import View.*;
 import Util.SMException;
 import Util.SesionController;
-        
+import java.util.Date;        
 
 public class SGMU {
     private LoginDAO loginDAO;
@@ -41,6 +41,7 @@ public class SGMU {
 
     public SGMU() {
         clienteDAO = new ClienteDAO();
+        servicioDAO = new ServicioDAO();
     }
 
     public void validarCliente(String tipdocc, String numdocc) throws SMException{
@@ -85,8 +86,8 @@ public class SGMU {
             return false;
         }
     }
-    /*
-    public boolean registrarServicio(String tipopaquete, String fservicio, String h_inicio, String cpostal){
+    
+    public boolean registrarServicio(String tipopaquete, long fservicio, String h_inicio, String cpostal) throws SMException{
         servicio = new Servicio();
         servicio.setTipopaquete(tipopaquete);
         servicio.setFservicio(fservicio);
@@ -94,18 +95,11 @@ public class SGMU {
         servicio.setCpostal(cpostal);
         servicio.setTipdocc(SesionController.getK_tipdoc());
         servicio.setNumdocc(SesionController.getK_numdoc());
-        //boolean result = servicioDAO.registrarServicio(servicio);
+        boolean result = servicioDAO.registrarServicio(servicio);
         
-        if(result == true){
-            Servicio.setKservicio(0);
-            return true;
-        }
-        
-        else{
-            return false;
-        }
+        return result == true;
     }
-    */
+    
     /*public boolean registrarIndicacion(String direccioni, String descripcion){
         servicio = new Servicio();
         servicio.setDirecccioni(direccioni);

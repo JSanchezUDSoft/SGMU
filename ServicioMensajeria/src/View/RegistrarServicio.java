@@ -1,11 +1,15 @@
 package View;
 
-
+import Util.SMException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import Controller.SGMU;//Obligatorio
+import Util.SMException;//Obligatorio
+import javax.swing.JOptionPane;//Obligatorio
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,13 +25,14 @@ public class RegistrarServicio extends javax.swing.JFrame {
     private String paquete;
     private String inicio;
     private String ciudad;
-    private Long fecha;
+    private long fecha;
+    private SGMU sgmu;//Obligatorio
 
-    public Long getFecha() {
+    public long getFecha() {
         return fecha;
     }
 
-    public void setFecha(Long fecha) {
+    public void setFecha(long fecha) {
         this.fecha = fecha;
     }
 
@@ -61,6 +66,7 @@ public class RegistrarServicio extends javax.swing.JFrame {
      */
     public RegistrarServicio() {
         initComponents();
+        sgmu = new SGMU();//Obligatorio
     }
 
     /**
@@ -283,40 +289,54 @@ public class RegistrarServicio extends javax.swing.JFrame {
     }//GEN-LAST:event_b_volverActionPerformed
 
     private void b_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_confirmarActionPerformed
-        LocalDate local = LocalDate.now();
-        ZoneId zid = ZoneId.systemDefault();
-        ZonedDateTime zdt = local.atStartOfDay(zid);
-        Date localdate = Date.from(zdt.toInstant());
-        if(t_fecha.getDate()==null){
-            showMessageDialog(null, "Fecha no especificada");
-        }else if(t_fecha.getDate().before(localdate) || t_fecha.getDate().equals(localdate)){
-            System.out.println(t_fecha.getDate()+" "+localdate);
-            showMessageDialog(null, "Fecha erronea");
-        }else{
-            
-            if(t_paquete.getSelectedItem().toString().equals("Sobre")){
-                    this.setPaquete("S");
-            }else if(t_paquete.getSelectedItem().toString().equals("Paquete Pequeño")){
-                    this.setPaquete("PP");
-            }else if(t_paquete.getSelectedItem().toString().equals("Paquete Mediano")){
-                    this.setPaquete("PM");
-            }else if(t_paquete.getSelectedItem().toString().equals("Paquete Grande")){
-                this.setPaquete("PG");
-            }
-            Date date = t_fecha.getDate();
-            this.setFecha(date.getTime());
-            System.out.println(t_fecha.getDate());
-            this.setInicio(t_hora.getSelectedItem().toString()+":"+t_minuto.getSelectedItem().toString());
-            if(t_ciudad.getSelectedItem().toString().equals("Bogotá")){
-                this.setCiudad("110111");
+        try{
+            LocalDate local = LocalDate.now();
+            ZoneId zid = ZoneId.systemDefault();
+            ZonedDateTime zdt = local.atStartOfDay(zid);
+            Date localdate = Date.from(zdt.toInstant());
+            if(t_fecha.getDate()==null){
+                showMessageDialog(null, "Fecha no especificada");
+            }else if(t_fecha.getDate().before(localdate) || t_fecha.getDate().equals(localdate)){
+                System.out.println(t_fecha.getDate()+" "+localdate);
+                showMessageDialog(null, "Fecha erronea");
             }else{
-                this.setCiudad("252212");
+
+                if(t_paquete.getSelectedItem().toString().equals("Sobre")){
+                        this.setPaquete("S");
+                }else if(t_paquete.getSelectedItem().toString().equals("Paquete Pequeño")){
+                        this.setPaquete("PP");
+                }else if(t_paquete.getSelectedItem().toString().equals("Paquete Mediano")){
+                        this.setPaquete("PM");
+                }else if(t_paquete.getSelectedItem().toString().equals("Paquete Grande")){
+                    this.setPaquete("PG");
+                }
+                Date date = t_fecha.getDate();
+                long d = date.getTime();
+                //java.sql.Date fecha = new java.sql.Date(d);
+                
+                this.setFecha(d);
+                //System.out.println(t_fecha.getDate());
+                this.setInicio(t_hora.getSelectedItem().toString()+":"+t_minuto.getSelectedItem().toString());
+                if(t_ciudad.getSelectedItem().toString().equals("Bogotá")){
+                    this.setCiudad("110111");
+                }else{
+                    this.setCiudad("252212");
+                }
+                boolean r = sgmu.registrarServicio(this.getPaquete(), this.getFecha(), this.getInicio(), this.getCiudad());
+                if(r == true){
+                    RegistrarIndicacion indicacion = new RegistrarIndicacion();
+                    indicacion.setVisible(true);
+                    this.setVisible(false);
+                    JOptionPane.showMessageDialog(null, "Servicio registrado correctamente");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Intente nuevamente");
+                }
+                
             }
-            this.setCiudad(t_ciudad.getSelectedItem().toString());
-            RegistrarIndicacion indicacion = new RegistrarIndicacion();
-            indicacion.setVisible(true);
-            this.setVisible(false);
-        }
+        }  catch (SMException f) {
+                JOptionPane.showMessageDialog(null, f, "Error", JOptionPane.ERROR_MESSAGE);
+            } 
         
     }//GEN-LAST:event_b_confirmarActionPerformed
 
