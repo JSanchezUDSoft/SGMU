@@ -32,7 +32,6 @@ public class SGMU {
     private PagoMensajero pagomensajero;
     private CalificacionDAO calificacionDAO;
     private Calificacion calificacion;
-    private SesionController sesioncontroller;
     //Vistas
     public ValidarCliente validarcliente;
     public RegistrarCliente registrarcliente;
@@ -59,7 +58,10 @@ public class SGMU {
             SesionController.setK_numdoc(numdocc);
         }
         else{
+            SesionController.setK_tipdoc(tipdocc);
+            SesionController.setK_numdoc(numdocc);
             System.out.print("Mostrar formulario cliente");
+            registrarcliente.actualizar();
             registrarcliente.setVisible(true);
         }
     }
@@ -76,9 +78,7 @@ public class SGMU {
         cliente.setCelular(celular);
         cliente.setDresidencia(dresidencia);
         int result = clienteDAO.registrarCliente(cliente);
-        if(result == 1){
-            SesionController.setK_tipdoc(tipdocc);
-            SesionController.setK_numdoc(numdocc);            
+        if(result == 1){  
             return true;
         }
         else{

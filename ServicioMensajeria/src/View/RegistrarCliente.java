@@ -3,6 +3,7 @@ package View;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import Controller.SGMU;//Obligatorio
+import Util.SesionController;
 import Util.SMException;//Obligatorio
 import javax.swing.JOptionPane;//Obligatorio
 /*
@@ -105,6 +106,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
         initComponents();
         sgmu = new SGMU();//Obligatorio
     }
+    
+    public void actualizar(){
+        this.l_tipdoc.setText(SesionController.getK_tipdoc());
+        this.l_numdoc.setText(SesionController.getK_numdoc());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,7 +124,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        l_tipdoc = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -126,8 +132,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
         t_n_1 = new javax.swing.JTextField();
         b_guardar = new javax.swing.JButton();
         b_volver = new javax.swing.JButton();
-        t_tipdoc = new javax.swing.JComboBox<>();
-        t_numdoc = new javax.swing.JTextField();
         t_n_2 = new javax.swing.JTextField();
         b_cancelar = new javax.swing.JButton();
         t_n_a1 = new javax.swing.JTextField();
@@ -139,6 +143,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        l_numdoc = new javax.swing.JLabel();
 
         jInternalFrame1.setMaximumSize(new java.awt.Dimension(720, 480));
         jInternalFrame1.setMinimumSize(new java.awt.Dimension(720, 480));
@@ -168,9 +174,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("REGISTRAR CLIENTE");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Tipo de documento:");
+        l_tipdoc.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        l_tipdoc.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -210,14 +215,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 b_volverActionPerformed(evt);
             }
         });
-
-        t_tipdoc.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        t_tipdoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cedula de Ciudadanía", "Cedula de extranjería", "Tarjeta de Identidad" }));
-
-        t_numdoc.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        t_numdoc.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 1));
-        t_numdoc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        t_numdoc.setPreferredSize(new java.awt.Dimension(200, 21));
 
         t_n_2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         t_n_2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 1));
@@ -274,6 +271,13 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Dirección:");
 
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Tipo de documento:");
+
+        l_numdoc.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        l_numdoc.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -286,8 +290,12 @@ public class RegistrarCliente extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(b_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(b_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 177, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
@@ -295,48 +303,43 @@ public class RegistrarCliente extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9)
-                                    .addComponent(jLabel10))
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(t_numdoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_n_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_n_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_celular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_n_a2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_n_a1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_correo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(t_tipdoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(b_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(b_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(118, 118, 118))
+                                    .addComponent(t_n_1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(t_n_2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(t_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(t_celular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(t_n_a2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(t_n_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(t_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(l_tipdoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(l_numdoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(180, 180, 180))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(b_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(29, 29, 29)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(t_tipdoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                        .addComponent(b_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(l_tipdoc, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(t_numdoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addComponent(l_numdoc, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(t_n_1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -368,7 +371,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -385,6 +388,12 @@ public class RegistrarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void b_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_cancelarActionPerformed
+        Index index = new Index();
+        index.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_b_cancelarActionPerformed
+
     private void b_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_volverActionPerformed
         ValidarCliente validar = new ValidarCliente();
         validar.setVisible(true);
@@ -392,30 +401,18 @@ public class RegistrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_b_volverActionPerformed
 
     private void b_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarActionPerformed
-        if(t_numdoc.getText().equals("")){
-            showMessageDialog(null, "Numero de documento no especificado");
-        }else if(t_n_1.getText().equals("")){
-            showMessageDialog(null, "Primer nombre no especificado");
-        }else if(t_n_a1.getText().equals("")){
-            showMessageDialog(null, "Primer apellido no especificado");
-        }else if(t_correo.getText().equals("")){
-            showMessageDialog(null, "correo no especificado");
-        }else if(t_celular.getText().equals("")){
-            showMessageDialog(null, "celular no especificado");
-        }else if(t_direccion.getText().equals("")){
-            showMessageDialog(null, "direccion no especificado");
-        }else{
-            if(t_tipdoc.getSelectedItem().toString().equals("Cedula de Ciudadanía")){
-                this.setTipdoc("CC");
-            }else if(t_tipdoc.getSelectedItem().toString().equals("Cedula de extranjería")){
-                this.setTipdoc("CE");
+        try {
+            if(t_n_1.getText().equals("")){
+                showMessageDialog(null, "Primer nombre no especificado");
+            }else if(t_n_a1.getText().equals("")){
+                showMessageDialog(null, "Primer apellido no especificado");
+            }else if(t_correo.getText().equals("")){
+                showMessageDialog(null, "correo no especificado");
+            }else if(t_celular.getText().equals("")){
+                showMessageDialog(null, "celular no especificado");
+            }else if(t_direccion.getText().equals("")){
+                showMessageDialog(null, "direccion no especificado");
             }else{
-                this.setTipdoc("TI");
-            }
-            System.out.println(tipdoc);
-        
-            try {
-                this.setNumdoc(t_numdoc.getText());
                 this.setN_1(t_n_1.getText());
                 this.setN_2(t_n_2.getText());
                 this.setN_a1(t_n_a1.getText());
@@ -423,21 +420,22 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 this.setCorreo(t_correo.getText());
                 this.setCelular(Long.parseLong(t_celular.getText()));
                 this.setDireccion(t_direccion.getText());
-                RegistrarServicio regis_servicio = new RegistrarServicio();
-                regis_servicio.setVisible(true);
-                this.setVisible(false);
-                sgmu.registrarCliente(this.getTipdoc(), this.getNumdoc(),this.getN_1(),this.getN_2(), this.getN_a1(), this.getN_a2(),this.getCorreo(), this.getCelular(),this.getDireccion());
-            } catch (SMException f) {
-              JOptionPane.showMessageDialog(null, f, "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_b_guardarActionPerformed
 
-    private void b_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_cancelarActionPerformed
-        Index index = new Index();
-        index.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_b_cancelarActionPerformed
+                this.setVisible(false);
+                boolean r = sgmu.registrarCliente(this.getTipdoc(), this.getNumdoc(),this.getN_1(),this.getN_2(), this.getN_a1(), this.getN_a2(),this.getCorreo(), this.getCelular(),this.getDireccion());
+                if(r == true){
+                    JOptionPane.showMessageDialog(null, "Cliente registrado correctamente");
+                    RegistrarServicio regis_servicio = new RegistrarServicio();
+                    regis_servicio.setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Intente nuevamente");
+                }
+            }
+            } catch (SMException f) {
+                JOptionPane.showMessageDialog(null, f, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_b_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,7 +449,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -460,6 +458,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel l_numdoc;
+    private javax.swing.JLabel l_tipdoc;
     private javax.swing.JTextField t_celular;
     private javax.swing.JTextField t_correo;
     private javax.swing.JTextField t_direccion;
@@ -467,7 +467,5 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField t_n_2;
     private javax.swing.JTextField t_n_a1;
     private javax.swing.JTextField t_n_a2;
-    private javax.swing.JTextField t_numdoc;
-    private javax.swing.JComboBox<String> t_tipdoc;
     // End of variables declaration//GEN-END:variables
 }
