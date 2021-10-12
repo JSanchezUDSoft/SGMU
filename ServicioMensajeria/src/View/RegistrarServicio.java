@@ -1,14 +1,13 @@
 package View;
 
-import Util.SMException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
-import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import Controller.SGMU;//Obligatorio
 import Util.SMException;//Obligatorio
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;//Obligatorio
 
 /*
@@ -25,16 +24,18 @@ public class RegistrarServicio extends javax.swing.JFrame {
     private String paquete;
     private String inicio;
     private String ciudad;
-    private java.sql.Date fecha;
+    private String fecha;
     private SGMU sgmu;//Obligatorio
 
-    public java.sql.Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(java.sql.Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    
 
     
 
@@ -298,7 +299,7 @@ public class RegistrarServicio extends javax.swing.JFrame {
             Date localdate = Date.from(zdt.toInstant());
             if(t_fecha.getDate()==null){
                 showMessageDialog(null, "Fecha no especificada");
-            }else if(t_fecha.getDate().before(localdate) || t_fecha.getDate().equals(localdate)){
+            }else if(t_fecha.getDate().before(localdate)){
                 System.out.println(t_fecha.getDate()+" "+localdate);
                 showMessageDialog(null, "Fecha erronea");
             }else{
@@ -312,19 +313,21 @@ public class RegistrarServicio extends javax.swing.JFrame {
                 }else if(t_paquete.getSelectedItem().toString().equals("Paquete Grande")){
                     this.setPaquete("PG");
                 }
+                
                 Date date = t_fecha.getDate();
-                long d = date.getTime();
-                System.out.println("a ber tu cola2:"+d);
-                java.sql.Date fecha = new java.sql.Date(d);
-                System.out.println("a ber tu cola: "+fecha);
-                this.setFecha(fecha);
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                String dstring = formato.format(date);
+                this.setFecha(dstring);
+                
                 this.setInicio(t_hora.getSelectedItem().toString()+":"+t_minuto.getSelectedItem().toString());
+                
                 if(t_ciudad.getSelectedItem().toString().equals("Bogotá")){
                     this.setCiudad("110111");
                 }else{
                     this.setCiudad("252212");
                 }
-                boolean r = sgmu.registrarServicio(this.getPaquete(), this.getFecha(), this.getInicio(), this.getCiudad());
+                
+                boolean r = sgmu.registrarServicio(this.getPaquete(), java.sql.Date.valueOf(this.getFecha()), this.getInicio(), this.getCiudad());
                 if(r == true){
                     RegistrarIndicacion indicacion = new RegistrarIndicacion();
                     indicacion.setVisible(true);

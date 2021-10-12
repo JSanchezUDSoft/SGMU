@@ -1,25 +1,19 @@
 package Model;
 
-import Util.SMException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import Controller.Servicio;
 
 import Util.SMException;
 import Util.ServiceLocator;
 import Util.SesionController;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ServicioDAO {
-    public boolean registrarServicio(Servicio servicio) throws SMException{
+    public boolean registrarServicio(Servicio servicio) throws SMException {
         try{
             
             String strSQL = "INSERT INTO \"Servicio\"(i_paquete,f_servicio,h_inicio,i_servicio,k_cpostal,k_tipdocc,k_numdocc,k_tipdocm,k_numdocm)  VALUES (?,?,?,'S',?,?,?,null,null)";
@@ -32,7 +26,7 @@ public class ServicioDAO {
             //System.out.println(d);
             //Date fecha = formato.parse("25-05-2015");
             //java.sql.Date f = new java.sql.Date(fecha.getTime()); 
-            prepStmt.setDate(2,(servicio.getFservicio()));
+            prepStmt.setDate(2,servicio.getFservicio());
             //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             //java.sql.Time timeValue = new java.sql.Time(sdf.parse(servicio.getH_inicio()).getTime());
             prepStmt.setTime(3, java.sql.Time.valueOf(servicio.getH_inicio()+":00"));
@@ -41,19 +35,23 @@ public class ServicioDAO {
             prepStmt.setString(6, SesionController.getK_numdoc());
             int r = prepStmt.executeUpdate();
             ServiceLocator.getInstance().commit();
+            prepStmt.close();
             if(r == 1){
                 int idServicio = 0;
                 strSQL = "SELECT k_servicio FROM \"Servicio\" WHERE k_tipdocc = ? AND k_numdocc = ? AND i_servicio = 'S' ORDER BY k_servicio DESC LIMIT 1;";
-                //Connection conexion = ServiceLocator.getInstance().tomarConexion();
-                //PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-                prepStmt.setString(1, SesionController.getK_tipdoc());
-                prepStmt.setString(2, SesionController.getK_numdoc());
-                ResultSet rs = prepStmt.executeQuery();
-                prepStmt.close();
+                Connection conexion2 = ServiceLocator.getInstance().tomarConexion();
+                PreparedStatement prepStmt2 = conexion2.prepareStatement(strSQL);
+                prepStmt2.setString(1, SesionController.getK_tipdoc());
+                prepStmt2.setString(2, SesionController.getK_numdoc());
+                //aca se muere :)
+                ResultSet rs = prepStmt2.executeQuery();
+                //aca se muere :)
+                
                 while (rs.next()){
                    idServicio = rs.getInt(1);
                 }
                 Servicio.setKservicio(idServicio);
+                prepStmt2.close();
                 return true;
             }
             else{
