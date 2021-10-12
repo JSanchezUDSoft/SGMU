@@ -53,7 +53,7 @@ public class SGMU {
         cliente.setNumdocc(numdocc);
         boolean result = clienteDAO.validarCliente(cliente);
         if(result == true){
-            System.out.print("Mostrar formulario servicio");
+            System.out.println("Mostrar formulario servicio");
             registrarservicio.setVisible(true);
             SesionController.setK_tipdoc(tipdocc);
             SesionController.setK_numdoc(numdocc);
@@ -61,7 +61,7 @@ public class SGMU {
         else{
             SesionController.setK_tipdoc(tipdocc);
             SesionController.setK_numdoc(numdocc);
-            System.out.print("Mostrar formulario cliente");
+            System.out.println("Mostrar formulario cliente");
             registrarcliente.actualizar();
             registrarcliente.setVisible(true);
         }
@@ -87,7 +87,7 @@ public class SGMU {
         }
     }
     
-    public boolean registrarServicio(String tipopaquete, long fservicio, String h_inicio, String cpostal) throws SMException{
+    public boolean registrarServicio(String tipopaquete, java.sql.Date fservicio, String h_inicio, String cpostal) throws SMException{
         servicio = new Servicio();
         servicio.setTipopaquete(tipopaquete);
         servicio.setFservicio(fservicio);

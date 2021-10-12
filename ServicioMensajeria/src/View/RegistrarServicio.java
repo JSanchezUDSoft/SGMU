@@ -25,16 +25,18 @@ public class RegistrarServicio extends javax.swing.JFrame {
     private String paquete;
     private String inicio;
     private String ciudad;
-    private long fecha;
+    private java.sql.Date fecha;
     private SGMU sgmu;//Obligatorio
 
-    public long getFecha() {
+    public java.sql.Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(long fecha) {
+    public void setFecha(java.sql.Date fecha) {
         this.fecha = fecha;
     }
+
+    
 
     public String getPaquete() {
         return paquete;
@@ -312,10 +314,10 @@ public class RegistrarServicio extends javax.swing.JFrame {
                 }
                 Date date = t_fecha.getDate();
                 long d = date.getTime();
-                //java.sql.Date fecha = new java.sql.Date(d);
-                
-                this.setFecha(d);
-                //System.out.println(t_fecha.getDate());
+                System.out.println("a ber tu cola2:"+d);
+                java.sql.Date fecha = new java.sql.Date(d);
+                System.out.println("a ber tu cola: "+fecha);
+                this.setFecha(fecha);
                 this.setInicio(t_hora.getSelectedItem().toString()+":"+t_minuto.getSelectedItem().toString());
                 if(t_ciudad.getSelectedItem().toString().equals("Bogotá")){
                     this.setCiudad("110111");

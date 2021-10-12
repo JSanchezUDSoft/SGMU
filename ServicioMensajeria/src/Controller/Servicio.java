@@ -5,7 +5,7 @@ import java.util.Date;
 public class Servicio {
     private static long    kservicio;
     private String         tipopaquete;
-    private long           fservicio;
+    private java.sql.Date          fservicio;
     private String         h_inicio;
     //private String iservicio;
     private String         cpostal;
@@ -22,6 +22,14 @@ public class Servicio {
     public Servicio() {
     }
 
+    public java.sql.Date getFservicio() {
+        return fservicio;
+    }
+
+    public void setFservicio(java.sql.Date fservicio) {
+        this.fservicio = fservicio;
+    }
+    
     public static long getKservicio() {
         return kservicio;
     }
@@ -36,14 +44,6 @@ public class Servicio {
 
     public void setTipopaquete(String tipopaquete) {
         this.tipopaquete = tipopaquete;
-    }
-
-    public long getFservicio() {
-        return fservicio;
-    }
-
-    public void setFservicio(long fservicio) {
-        this.fservicio = fservicio;
     }
 
     public String getH_inicio() {

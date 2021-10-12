@@ -26,11 +26,11 @@ public class ServicioDAO {
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setString(1, servicio.getTipopaquete());
-            java.sql.Date feca = new java.sql.Date(servicio.getFservicio());
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd"); 
-            Date fecha = formato.parse("23-11-2015");
-            java.sql.Date f = new java.sql.Date(fecha.getTime());
-            prepStmt.setDate(2, f);
+            //java.sql.Date feca = new java.sql.Date(servicio.getFservicio());
+            //SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd"); 
+            //Date fecha = formato.parse("25-05-2015");
+            //java.sql.Date f = new java.sql.Date(fecha.getTime());
+            prepStmt.setDate(2, servicio.getFservicio());
             //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             //java.sql.Time timeValue = new java.sql.Time(sdf.parse(servicio.getH_inicio()).getTime());
             prepStmt.setTime(3, java.sql.Time.valueOf(servicio.getH_inicio()+":00"));
@@ -60,9 +60,6 @@ public class ServicioDAO {
             
         } catch (SQLException e){
             throw new SMException("ServicioDAO", e.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(ServicioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
