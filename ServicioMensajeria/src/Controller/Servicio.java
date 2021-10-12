@@ -5,7 +5,7 @@ import java.util.Date;
 public class Servicio {
     private static long    kservicio;
     private String         tipopaquete;
-    private java.sql.Date          fservicio;
+    private java.sql.Date  fservicio;
     private String         h_inicio;
     //private String iservicio;
     private String         cpostal;
