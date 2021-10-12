@@ -27,10 +27,12 @@ public class ServicioDAO {
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setString(1, servicio.getTipopaquete());
             //java.sql.Date feca = new java.sql.Date(servicio.getFservicio());
-            //SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd"); 
+            //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            //String d = formato.format(servicio.getFservicio());
+            //System.out.println(d);
             //Date fecha = formato.parse("25-05-2015");
-            //java.sql.Date f = new java.sql.Date(fecha.getTime());
-            prepStmt.setDate(2, servicio.getFservicio());
+            //java.sql.Date f = new java.sql.Date(fecha.getTime()); 
+            prepStmt.setDate(2,(servicio.getFservicio()));
             //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             //java.sql.Time timeValue = new java.sql.Time(sdf.parse(servicio.getH_inicio()).getTime());
             prepStmt.setTime(3, java.sql.Time.valueOf(servicio.getH_inicio()+":00"));
