@@ -39,29 +39,58 @@ public class ServicioDAO {
             if(r == 1){
                 int idServicio = 0;
                 strSQL = "SELECT k_servicio FROM \"Servicio\" WHERE k_tipdocc = ? AND k_numdocc = ? AND i_servicio = 'S' ORDER BY k_servicio DESC LIMIT 1;";
-                Connection conexion2 = ServiceLocator.getInstance().tomarConexion();
-                PreparedStatement prepStmt2 = conexion2.prepareStatement(strSQL);
-                prepStmt2.setString(1, SesionController.getK_tipdoc());
-                prepStmt2.setString(2, SesionController.getK_numdoc());
+                //Connection conexion = ServiceLocator.getInstance().tomarConexion();
+                prepStmt = conexion.prepareStatement(strSQL);
+                prepStmt.setString(1, SesionController.getK_tipdoc());
+                prepStmt.setString(2, SesionController.getK_numdoc());
                 //aca se muere :)
-                ResultSet rs = prepStmt2.executeQuery();
+                ResultSet rs = prepStmt.executeQuery();
                 //aca se muere :)
+
+            while (rs.next()){
+               idServicio = rs.getInt(1);
+            }
+            
+            Servicio.setKservicio(idServicio);
+                //ServiceLocator.getInstance().liberarConexion();
+                //boolean res = consultarServicio();
                 
-                while (rs.next()){
-                   idServicio = rs.getInt(1);
-                }
-                Servicio.setKservicio(idServicio);
-                prepStmt2.close();
                 return true;
             }
             else{
                 return false;
             }
-            
         } catch (SQLException e){
             throw new SMException("ServicioDAO", e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
+    
+    /*public boolean consultarServicio() throws SMException{
+        try{
+            int idServicio = 0;
+            String strSQL = "SELECT k_servicio FROM \"Servicio\" WHERE k_tipdocc = ? AND k_numdocc = ? AND i_servicio = 'S' ORDER BY k_servicio DESC LIMIT 1;";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setString(1, SesionController.getK_tipdoc());
+            prepStmt.setString(2, SesionController.getK_numdoc());
+            //aca se muere :)
+            ResultSet rs = prepStmt.executeQuery();
+            //aca se muere :)
+
+            while (rs.next()){
+               idServicio = rs.getInt(1);
+            }
+            
+            Servicio.setKservicio(idServicio);
+            return true;
+            //prepStmt.close();
+        } catch (SQLException e){
+            throw new SMException("ServicioDAO", e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+        
+    }*/
 }
