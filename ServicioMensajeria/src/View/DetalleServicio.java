@@ -20,16 +20,24 @@ public class DetalleServicio extends javax.swing.JFrame {
     public void setLabels(Servicio servicio){
             float costoTotal = 0;
             this.l_ciudad.setText(servicio.getCpostal());
-            this.l_tipo_paquete.setText(servicio.getTipopaquete());
+            if(servicio.getTipopaquete().equals("S")){
+                this.l_tipo_paquete.setText("Sobre");
+            }else if (servicio.getTipopaquete().equals("PP")){
+                this.l_tipo_paquete.setText("Paquete Pequeño");
+            }else if (servicio.getTipopaquete().equals("PM")){
+                this.l_tipo_paquete.setText("Paquete Mediano");
+            }else{
+                this.l_tipo_paquete.setText("Paquete Grande");
+            }
             this.l_fecha.setText(servicio.getFservicio().toString());
             this.l_hora.setText(servicio.getH_inicio());
-            costoTotal= servicio.getVpaquete() + (servicio.getVpaquete()*(servicio.getPcomision()/100));
-            this.l_Ctotal.setText("$ "+Float.toString(costoTotal));
-            this.l_tarifa_c.setText(Float.toString(servicio.getPcomision())+"%");
+            this.l_Ctotal.setText(Float.toString(servicio.getVpaquete()));
+            this.l_tarifa_c.setText(Float.toString(servicio.getPcomision()));
             this.l_precioP.setText("$ "+Float.toString(servicio.getVpaquete()));
     }
     
     public void tablaDetalleServicio(ResultSet rs) throws SQLException{
+        int cont=0;
         try{            
             DefaultTableModel modelo  = new DefaultTableModel(){
             public boolean isCellEditable(int row, int column){
@@ -40,8 +48,12 @@ public class DetalleServicio extends javax.swing.JFrame {
             //this.Table.setDefaultRenderer(Object.class, new Render());
             modelo.setColumnIdentifiers(new Object[]{"Direccion", "Descripcion de la indicacion"}); 
             while(rs.next()){
+                cont++;
                 modelo.addRow(new Object[]{rs.getString(1), rs.getString(2)});                
             }
+            float valor_total = Float.parseFloat(this.l_Ctotal.getText())+(Float.parseFloat(this.l_tarifa_c.getText())*cont);
+            this.l_Ctotal.setText("$ "+Float.toString(valor_total));
+            this.l_tarifa_c.setText("$ "+l_tarifa_c.getText());
             this.Table.setModel(modelo);
             this.Table.setRowHeight(30);
             
