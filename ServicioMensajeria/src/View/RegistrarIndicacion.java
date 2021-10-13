@@ -13,6 +13,7 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
     private SGMU sgmu;
     private String indicacion;
     private String descripcion;
+    private int cont = 0;
 
     public String getIndicacion() {
         return indicacion;
@@ -37,6 +38,7 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
     public RegistrarIndicacion() {
         initComponents();
         sgmu = new SGMU();
+        this.b_detalle.setVisible(false);
     }
 
     /**
@@ -56,6 +58,7 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         b_registrar = new javax.swing.JButton();
+        b_detalle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +95,15 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
             }
         });
 
+        b_detalle.setBackground(new java.awt.Color(255, 255, 0));
+        b_detalle.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        b_detalle.setText("IR A DETALLE");
+        b_detalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_detalleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -109,11 +121,13 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(34, 34, 34)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(b_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
-                        .addComponent(t_indicacion, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(b_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(b_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(t_indicacion, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
                 .addGap(208, 208, 208))
         );
         jPanel1Layout.setVerticalGroup(
@@ -130,7 +144,9 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addComponent(b_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(b_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -167,17 +183,23 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
             }
             
             if(r==true){
-                JOptionPane.showMessageDialog(null, "Servicio creado correctamente.");
+                cont++;
+                JOptionPane.showMessageDialog(null, "Se ha registrado la indicación "+cont);
+                this.b_detalle.setVisible(true);
+                this.t_descripcion.setText(null);
+                this.t_indicacion.setText(null);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
             }
-            JOptionPane.showMessageDialog(null, "Servicio registrado correctamente");
-            DetalleServicio detalle = new DetalleServicio();
-            detalle.setVisible(true);
-            this.setVisible(false);
         }
     }//GEN-LAST:event_b_registrarActionPerformed
+
+    private void b_detalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_detalleActionPerformed
+        DetalleServicio detalle = new DetalleServicio();
+        detalle.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_b_detalleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +207,7 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b_detalle;
     private javax.swing.JButton b_registrar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
