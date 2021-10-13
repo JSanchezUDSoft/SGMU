@@ -185,7 +185,8 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
             if(r==true){
                 cont++;
                 JOptionPane.showMessageDialog(null, "Se ha registrado la indicación "+cont);
-                this.b_detalle.setVisible(true);
+                if(cont>=2)
+                    this.b_detalle.setVisible(true);
                 this.t_descripcion.setText(null);
                 this.t_indicacion.setText(null);
             }
