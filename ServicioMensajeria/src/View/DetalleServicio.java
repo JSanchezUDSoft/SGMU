@@ -42,6 +42,10 @@ public class DetalleServicio extends javax.swing.JFrame {
         l_tarifa_c = new javax.swing.JLabel();
         l_precioP = new javax.swing.JLabel();
         l_Ctotal = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        l_fecha = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        l_hora = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,7 +104,7 @@ public class DetalleServicio extends javax.swing.JFrame {
 
         l_direccion.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         l_direccion.setForeground(new java.awt.Color(255, 255, 255));
-        l_direccion.setText("Dirreción");
+        l_direccion.setText("Direción");
 
         l_tipo_paquete.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         l_tipo_paquete.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,6 +122,22 @@ public class DetalleServicio extends javax.swing.JFrame {
         l_Ctotal.setForeground(new java.awt.Color(255, 255, 255));
         l_Ctotal.setText("estimado");
 
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Fecha servicio");
+
+        l_fecha.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        l_fecha.setForeground(new java.awt.Color(255, 255, 255));
+        l_fecha.setText("fecha");
+
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Hora servicio");
+
+        l_hora.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        l_hora.setForeground(new java.awt.Color(255, 255, 255));
+        l_hora.setText("Hora");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -129,40 +149,49 @@ public class DetalleServicio extends javax.swing.JFrame {
                         .addComponent(b_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(493, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 143, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(213, 213, 213))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(b_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(214, 214, 214))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(167, 167, 167))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(59, 59, 59)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(l_tipo_paquete)
-                                    .addComponent(l_direccion)
-                                    .addComponent(l_ciudad)
                                     .addComponent(l_Ctotal)
                                     .addComponent(l_tarifa_c)
                                     .addComponent(l_precioP))
-                                .addGap(127, 127, 127))))))
+                                .addGap(142, 142, 142))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12))
+                                .addGap(87, 87, 87)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(l_hora)
+                                    .addComponent(l_tipo_paquete)
+                                    .addComponent(l_direccion)
+                                    .addComponent(l_ciudad)
+                                    .addComponent(l_fecha))
+                                .addGap(142, 142, 142))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(b_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(b_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(l_ciudad))
@@ -174,7 +203,15 @@ public class DetalleServicio extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(l_tipo_paquete))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(l_fecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(l_hora))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(l_Ctotal))
@@ -186,7 +223,7 @@ public class DetalleServicio extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(l_precioP))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
                 .addComponent(b_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -224,6 +261,8 @@ public class DetalleServicio extends javax.swing.JFrame {
     private javax.swing.JButton b_inicio;
     private javax.swing.JButton b_volver;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -234,6 +273,8 @@ public class DetalleServicio extends javax.swing.JFrame {
     private javax.swing.JLabel l_Ctotal;
     private javax.swing.JLabel l_ciudad;
     private javax.swing.JLabel l_direccion;
+    private javax.swing.JLabel l_fecha;
+    private javax.swing.JLabel l_hora;
     private javax.swing.JLabel l_precioP;
     private javax.swing.JLabel l_tarifa_c;
     private javax.swing.JLabel l_tipo_paquete;

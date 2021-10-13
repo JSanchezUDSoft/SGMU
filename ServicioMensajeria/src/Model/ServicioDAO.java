@@ -84,4 +84,20 @@ public class ServicioDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
+    public void DetalleServicio() {
+        try {
+            String SQL = "SELECT s.k_servicio, s.i_paquete, s.f_servicio, s.h_inicio, m.n_ciudad FROM \"Servicio\" s INNER JOIN \"Ciudad\" m ON m.k_cpostal = s.k_cpostal WHERE s.k_servicio = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            PreparedStatement stmt = conexion.prepareStatement(SQL);
+            ResultSet rs = stmt.executeQuery(SQL);
+            while (rs.next()) {
+            //holi   
+            }
+            rs.close();
+            stmt.close();
+        }
+        catch (Exception e) {
+        e.printStackTrace();
+        }
+    }
 }

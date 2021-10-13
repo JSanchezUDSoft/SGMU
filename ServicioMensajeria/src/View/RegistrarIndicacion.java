@@ -195,7 +195,7 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
             }
-            
+            JOptionPane.showMessageDialog(null, "Servicio registrado correctamente");
             DetalleServicio detalle = new DetalleServicio();
             detalle.setVisible(true);
             this.setVisible(false);

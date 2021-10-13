@@ -328,7 +328,6 @@ public class RegistrarServicio extends javax.swing.JFrame {
                     RegistrarIndicacion indicacion = new RegistrarIndicacion();
                     indicacion.setVisible(true);
                     this.setVisible(false);
-                    JOptionPane.showMessageDialog(null, "Servicio registrado correctamente");
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Intente nuevamente");
