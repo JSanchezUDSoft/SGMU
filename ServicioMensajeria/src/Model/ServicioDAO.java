@@ -86,7 +86,7 @@ public class ServicioDAO {
     }
     public void DetalleServicio() {
         try {
-            String SQL = "SELECT s.k_servicio, s.i_paquete, s.f_servicio, s.h_inicio, m.n_ciudad FROM \"Servicio\" s INNER JOIN \"Ciudad\" m ON m.k_cpostal = s.k_cpostal WHERE s.k_servicio = ?";
+            String SQL = "SELECT s.k_servicio, s.i_paquete, s.f_servicio, s.h_inicio, m.n_ciudad,m.q_pcomision,t.v_paquete FROM \"Servicio\" s, \"Ciudad\" m,\"Tarifa\" t, \"CiudadTarifa\" ct WHERE t.k_tarifa = ct.k_tarifa AND m.k_cpostal = ct.k_cpostal AND m.k_cpostal = s.k_cpostal AND s.i_paquete = t.i_paquete AND s.k_servicio = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement stmt = conexion.prepareStatement(SQL);
             ResultSet rs = stmt.executeQuery(SQL);
