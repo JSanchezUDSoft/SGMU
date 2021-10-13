@@ -15,6 +15,9 @@ import Util.SMException;
 import Util.SesionController;
 import java.util.Date; 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SGMU {
     private LoginDAO loginDAO;
@@ -111,7 +114,15 @@ public class SGMU {
     }
     
     public ResultSet DetalleServicio() throws SMException{
-        ResultSet rs = servicioDAO.DetalleServicio(servicio);
-        return rs;
+        try {
+            ResultSet rs = servicioDAO.DetalleServicio(servicio);
+            DetalleServicio d = new DetalleServicio();
+            d.setVisible(true);
+            d.tablaDetalleServicio(rs);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(SGMU.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }
