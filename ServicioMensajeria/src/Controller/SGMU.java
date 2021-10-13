@@ -100,11 +100,12 @@ public class SGMU {
         return result == true;
     }
     
-    /*public boolean registrarIndicacion(String direccioni, String descripcion){
+    public boolean registrarIndicacion(String direccioni, String descripcion) throws SMException{
         servicio = new Servicio();
         servicio.setDirecccioni(direccioni);
         servicio.setDescripcioni(descripcion);
-        boolean result = servicioDAO.registrarIndicacion(servicio);
-        return result == true;
-    }*/
+        int result = servicioDAO.registrarIndicacion(servicio);
+        
+        return result != 0;
+    }
 }

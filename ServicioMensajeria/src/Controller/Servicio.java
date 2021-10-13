@@ -3,21 +3,21 @@ package Controller;
 import java.util.Date;
 
 public class Servicio {
-    private static long    kservicio;
-    private String         tipopaquete;
-    private java.sql.Date         fservicio;
-    private String         h_inicio;
+    private static long     kservicio;
+    private String          tipopaquete;
+    private java.sql.Date   fservicio;
+    private String          h_inicio;
     //private String iservicio;
-    private String         cpostal;
-    private String         tipdocc;
-    private String         numdocc;
+    private String          cpostal;
+    private String          tipdocc;
+    private String          numdocc;
     //private String  tipdocm;
     //private String  numdocm;
     //Entidad pago servicio
-    private String         mpago;
+    private String          mpago;
     //Entidad indicacion
-    private String         direcccioni;
-    private String         descripcioni;
+    private String          direcccioni;
+    private String          descripcioni;
 
     public Servicio() {
     }

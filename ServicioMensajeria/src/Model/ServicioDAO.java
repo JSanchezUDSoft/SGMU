@@ -15,7 +15,6 @@ import Util.SesionController;
 public class ServicioDAO {
     public boolean registrarServicio(Servicio servicio) throws SMException {
         try{
-            
             String strSQL = "INSERT INTO \"Servicio\"(i_paquete,f_servicio,h_inicio,i_servicio,k_cpostal,k_tipdocc,k_numdocc,k_tipdocm,k_numdocm)  VALUES (?,?,?,'S',?,?,?,null,null)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
@@ -67,30 +66,22 @@ public class ServicioDAO {
         }
     }
     
-    /*public boolean consultarServicio() throws SMException{
+    public int registrarIndicacion(Servicio servicio) throws SMException{
         try{
-            int idServicio = 0;
-            String strSQL = "SELECT k_servicio FROM \"Servicio\" WHERE k_tipdocc = ? AND k_numdocc = ? AND i_servicio = 'S' ORDER BY k_servicio DESC LIMIT 1;";
+            String strSQL = "INSERT INTO \"Indicacion\"(k_servicio,d_indicacion,n_descripcion) VALUES (?,?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-            prepStmt.setString(1, SesionController.getK_tipdoc());
-            prepStmt.setString(2, SesionController.getK_numdoc());
-            //aca se muere :)
-            ResultSet rs = prepStmt.executeQuery();
-            //aca se muere :)
-
-            while (rs.next()){
-               idServicio = rs.getInt(1);
-            }
-            
-            Servicio.setKservicio(idServicio);
-            return true;
-            //prepStmt.close();
+            prepStmt.setLong(1, Servicio.getKservicio());
+            prepStmt.setString(2, servicio.getDirecccioni());
+            prepStmt.setString(3, servicio.getDescripcioni());
+            int r = prepStmt.executeUpdate();
+            prepStmt.close();
+            ServiceLocator.getInstance().commit();
+            return r;
         } catch (SQLException e){
-            throw new SMException("ServicioDAO", e.getMessage());
+            throw new SMException("ClienteDAO", e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
-        
-    }*/
+    }
 }

@@ -1,18 +1,16 @@
 package View;
 
 import static javax.swing.JOptionPane.showMessageDialog;
+import Controller.SGMU;
+import Util.SMException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
-/**
- *
- * @author DogMey
- */
 public class RegistrarIndicacion extends javax.swing.JFrame {
     
+    private SGMU sgmu;
     private String indicacion;
     private String descripcion;
 
@@ -38,6 +36,7 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
      */
     public RegistrarIndicacion() {
         initComponents();
+        sgmu = new SGMU();
     }
 
     /**
@@ -197,10 +196,24 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
         }else{
             this.setIndicacion(t_indicacion.getText());
             this.setDescripcion(t_descripcion.getText());
-            showMessageDialog(null, "Servicio creado");
-            Index index = new Index();
-            index.setVisible(true);
-            this.setVisible(false);
+            
+            boolean r = false;
+            try {
+                r = sgmu.registrarIndicacion(this.getIndicacion(), this.getDescripcion());
+            } catch (SMException ex) {
+                Logger.getLogger(RegistrarIndicacion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(r==true){
+                JOptionPane.showMessageDialog(null, "Servicio creado correctamente.");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
+            }
+            
+            //Index index = new Index();
+            //index.setVisible(true);
+            //this.setVisible(false);
         }
     }//GEN-LAST:event_b_registrarActionPerformed
 
