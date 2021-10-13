@@ -197,8 +197,12 @@ public class RegistrarIndicacion extends javax.swing.JFrame {
     }//GEN-LAST:event_b_registrarActionPerformed
 
     private void b_detalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_detalleActionPerformed
-        DetalleServicio detalle = new DetalleServicio();
-        detalle.setVisible(true);
+      
+    try {
+        sgmu.DetalleServicio();
+    } catch (SMException ex) {
+        Logger.getLogger(RegistrarIndicacion.class.getName()).log(Level.SEVERE, null, ex);
+    }
         this.setVisible(false);
     }//GEN-LAST:event_b_detalleActionPerformed
 

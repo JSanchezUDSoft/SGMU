@@ -2,32 +2,35 @@
 package View;
 
 import Controller.SGMU;
-import Controller.Servicio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Controller.Servicio;
 
 public class DetalleServicio extends javax.swing.JFrame {
     private SGMU sgmu;
-    private Servicio servicio;
     
     public DetalleServicio() {
         initComponents();
         sgmu = new SGMU();
     }
     
-    public void tablaDetalleServicio(ResultSet rs) throws SQLException{
-        try{
+    public void setLabels(Servicio servicio){
+            float costoTotal = 0;
             this.l_ciudad.setText(servicio.getCpostal());
-            this.l_direccion.setText(servicio.getDirecccioni());
             this.l_tipo_paquete.setText(servicio.getTipopaquete());
             this.l_fecha.setText(servicio.getFservicio().toString());
             this.l_hora.setText(servicio.getH_inicio());
-            //this.l_Ctotal.setText(servicio.)
-            this.l_tarifa_c.setText(Float.toString(servicio.getPcomision()));
-            this.l_precioP.setText(Float.toString(servicio.getVpaquete()));
+            costoTotal= servicio.getVpaquete() + (servicio.getVpaquete()*(servicio.getPcomision()/100));
+            this.l_Ctotal.setText("$ "+Float.toString(costoTotal));
+            this.l_tarifa_c.setText(Float.toString(servicio.getPcomision())+"%");
+            this.l_precioP.setText("$ "+Float.toString(servicio.getVpaquete()));
+    }
+    
+    public void tablaDetalleServicio(ResultSet rs) throws SQLException{
+        try{            
             DefaultTableModel modelo  = new DefaultTableModel(){
             public boolean isCellEditable(int row, int column){
                     return false;
@@ -35,11 +38,10 @@ public class DetalleServicio extends javax.swing.JFrame {
             };
 
             //this.Table.setDefaultRenderer(Object.class, new Render());
-            modelo.setColumnIdentifiers(new Object[]{"Direccion", "Descripcion de la indicacion"});             
-            modelo.addRow(new Object[]{rs.getString(1),
-                                       rs.getString(2),
-            });                
-
+            modelo.setColumnIdentifiers(new Object[]{"Direccion", "Descripcion de la indicacion"}); 
+            while(rs.next()){
+                modelo.addRow(new Object[]{rs.getString(1), rs.getString(2)});                
+            }
             this.Table.setModel(modelo);
             this.Table.setRowHeight(30);
             
@@ -58,9 +60,7 @@ public class DetalleServicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        b_volver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -68,7 +68,6 @@ public class DetalleServicio extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         b_inicio = new javax.swing.JButton();
         l_ciudad = new javax.swing.JLabel();
-        l_direccion = new javax.swing.JLabel();
         l_tipo_paquete = new javax.swing.JLabel();
         l_tarifa_c = new javax.swing.JLabel();
         l_precioP = new javax.swing.JLabel();
@@ -84,27 +83,14 @@ public class DetalleServicio extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 120, 120));
 
-        b_volver.setBackground(new java.awt.Color(0, 216, 246));
-        b_volver.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        b_volver.setText("VOLVER");
-        b_volver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_volverActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("DETALLE DEL SERVICIO");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Dirección servicio:");
-
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Ciudad");
+        jLabel6.setText("Ciudad:");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,10 +121,6 @@ public class DetalleServicio extends javax.swing.JFrame {
         l_ciudad.setForeground(new java.awt.Color(255, 255, 255));
         l_ciudad.setText("Ciudad");
 
-        l_direccion.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        l_direccion.setForeground(new java.awt.Color(255, 255, 255));
-        l_direccion.setText("Direción");
-
         l_tipo_paquete.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         l_tipo_paquete.setForeground(new java.awt.Color(255, 255, 255));
         l_tipo_paquete.setText("Tipo Paquete");
@@ -157,7 +139,7 @@ public class DetalleServicio extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Fecha servicio");
+        jLabel11.setText("Fecha servicio:");
 
         l_fecha.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         l_fecha.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,7 +147,7 @@ public class DetalleServicio extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Hora servicio");
+        jLabel12.setText("Hora servicio:");
 
         l_hora.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         l_hora.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,68 +172,58 @@ public class DetalleServicio extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(33, 33, 33)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(201, 201, 201)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(l_Ctotal)
+                                    .addGap(29, 29, 29))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jLabel12))
+                                        .addGap(114, 114, 114)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(l_hora)
+                                            .addComponent(l_tipo_paquete)
+                                            .addComponent(l_ciudad)
+                                            .addComponent(l_fecha))))))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(187, 187, 187)
+                            .addComponent(jLabel10))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel8))
+                            .addGap(97, 97, 97)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(l_tarifa_c)
+                                .addComponent(l_precioP))
+                            .addGap(147, 147, 147)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(b_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8))
-                                .addGap(97, 97, 97)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(l_tarifa_c)
-                                    .addComponent(l_precioP)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel11)
-                                        .addComponent(jLabel12))
-                                    .addGap(87, 87, 87)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(l_hora)
-                                        .addComponent(l_tipo_paquete)
-                                        .addComponent(l_direccion)
-                                        .addComponent(l_ciudad)
-                                        .addComponent(l_fecha)))))))
+                        .addGap(266, 266, 266)
+                        .addComponent(b_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(42, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(264, 264, 264)
-                        .addComponent(b_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(jLabel10)
-                        .addGap(73, 73, 73)
-                        .addComponent(l_Ctotal)))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(b_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGap(23, 23, 23)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(l_ciudad))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(l_direccion))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(l_tipo_paquete))
@@ -263,11 +235,11 @@ public class DetalleServicio extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(l_hora))
-                .addGap(26, 26, 26)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(l_Ctotal))
-                .addGap(31, 31, 31)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(l_tarifa_c))
@@ -275,11 +247,11 @@ public class DetalleServicio extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(l_precioP))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
                 .addComponent(b_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(60, 60, 60))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -296,12 +268,6 @@ public class DetalleServicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void b_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_volverActionPerformed
-        RegistrarIndicacion indicacion = new RegistrarIndicacion();
-        indicacion.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_b_volverActionPerformed
-
     private void b_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_inicioActionPerformed
         Index index = new Index();
         index.setVisible(true);
@@ -312,12 +278,10 @@ public class DetalleServicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table;
     private javax.swing.JButton b_inicio;
-    private javax.swing.JButton b_volver;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -326,7 +290,6 @@ public class DetalleServicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel l_Ctotal;
     private javax.swing.JLabel l_ciudad;
-    private javax.swing.JLabel l_direccion;
     private javax.swing.JLabel l_fecha;
     private javax.swing.JLabel l_hora;
     private javax.swing.JLabel l_precioP;

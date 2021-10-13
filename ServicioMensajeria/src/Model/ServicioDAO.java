@@ -91,7 +91,7 @@ public class ServicioDAO {
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setLong(1, Servicio.getKservicio());
-            ResultSet rs = prepStmt.executeQuery(strSQL);
+            ResultSet rs = prepStmt.executeQuery();
             while (rs.next()) {
                 servicio.setTipopaquete(rs.getString(2));
                 servicio.setFservicio(rs.getDate(3));
@@ -100,14 +100,14 @@ public class ServicioDAO {
                 servicio.setPcomision(rs.getFloat(6));
                 servicio.setVpaquete(rs.getFloat(7));
             }
-            rs.close();
+            //rs.close();
             prepStmt.close();
             
             strSQL = "SELECT d_indicacion, n_descripcion FROM \"Indicacion\" WHERE k_servicio = ?";
             //Connection conexion = ServiceLocator.getInstance().tomarConexion();
             prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setLong(1, Servicio.getKservicio());
-            rs = prepStmt.executeQuery(strSQL);
+            rs = prepStmt.executeQuery();
             
             return rs;
         }

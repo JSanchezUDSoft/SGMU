@@ -113,16 +113,15 @@ public class SGMU {
         return result != 0;
     }
     
-    public ResultSet DetalleServicio() throws SMException{
+    public void DetalleServicio() throws SMException{
         try {
             ResultSet rs = servicioDAO.DetalleServicio(servicio);
             DetalleServicio d = new DetalleServicio();
             d.setVisible(true);
+            d.setLabels(servicio);
             d.tablaDetalleServicio(rs);
-            return rs;
         } catch (SQLException ex) {
             Logger.getLogger(SGMU.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
         }
     }
 }
