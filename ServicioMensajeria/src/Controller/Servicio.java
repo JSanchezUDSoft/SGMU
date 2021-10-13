@@ -7,17 +7,12 @@ public class Servicio {
     private String          tipopaquete;
     private java.sql.Date   fservicio;
     private String          h_inicio;
-    //private String iservicio;
     private String          cpostal;
     private float           pcomision;
     private float           vpaquete;
     private String          tipdocc;
     private String          numdocc;
-    //private String  tipdocm;
-    //private String  numdocm;
-    //Entidad pago servicio
     private String          mpago;
-    //Entidad indicacion
     private String          direcccioni;
     private String          descripcioni;
 

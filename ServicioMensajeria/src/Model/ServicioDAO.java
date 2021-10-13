@@ -19,15 +19,7 @@ public class ServicioDAO {
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setString(1, servicio.getTipopaquete());
-            //java.sql.Date feca = new java.sql.Date(servicio.getFservicio());
-            //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            //String d = formato.format(servicio.getFservicio());
-            //System.out.println(d);
-            //Date fecha = formato.parse("25-05-2015");
-            //java.sql.Date f = new java.sql.Date(fecha.getTime()); 
             prepStmt.setDate(2,servicio.getFservicio());
-            //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            //java.sql.Time timeValue = new java.sql.Time(sdf.parse(servicio.getH_inicio()).getTime());
             prepStmt.setTime(3, java.sql.Time.valueOf(servicio.getH_inicio()+":00"));
             prepStmt.setString(4, servicio.getCpostal());
             prepStmt.setString(5, SesionController.getK_tipdoc());
@@ -38,21 +30,17 @@ public class ServicioDAO {
             if(r == 1){
                 int idServicio = 0;
                 strSQL = "SELECT k_servicio FROM \"Servicio\" WHERE k_tipdocc = ? AND k_numdocc = ? AND i_servicio = 'S' ORDER BY k_servicio DESC LIMIT 1;";
-                //Connection conexion = ServiceLocator.getInstance().tomarConexion();
                 prepStmt = conexion.prepareStatement(strSQL);
                 prepStmt.setString(1, SesionController.getK_tipdoc());
                 prepStmt.setString(2, SesionController.getK_numdoc());
-                //aca se muere :)
                 ResultSet rs = prepStmt.executeQuery();
-                //aca se muere :)
 
             while (rs.next()){
                idServicio = rs.getInt(1);
             }
             
             Servicio.setKservicio(idServicio);
-                //ServiceLocator.getInstance().liberarConexion();
-                //boolean res = consultarServicio();
+
                 
                 return true;
             }
@@ -100,11 +88,9 @@ public class ServicioDAO {
                 servicio.setPcomision(rs.getFloat(6));
                 servicio.setVpaquete(rs.getFloat(7));
             }
-            //rs.close();
             prepStmt.close();
             
             strSQL = "SELECT d_indicacion, n_descripcion FROM \"Indicacion\" WHERE k_servicio = ?";
-            //Connection conexion = ServiceLocator.getInstance().tomarConexion();
             prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.setLong(1, Servicio.getKservicio());
             rs = prepStmt.executeQuery();

@@ -44,8 +44,6 @@ public class DetalleServicio extends javax.swing.JFrame {
                     return false;
                 }
             };
-
-            //this.Table.setDefaultRenderer(Object.class, new Render());
             modelo.setColumnIdentifiers(new Object[]{"Direccion", "Descripcion de la indicacion"}); 
             while(rs.next()){
                 cont++;
@@ -53,10 +51,9 @@ public class DetalleServicio extends javax.swing.JFrame {
             }
             float valor_total = Float.parseFloat(this.l_Ctotal.getText())+(Float.parseFloat(this.l_tarifa_c.getText())*cont);
             this.l_Ctotal.setText("$ "+Float.toString(valor_total));
-            this.l_tarifa_c.setText("$ "+l_tarifa_c.getText());
+            this.l_tarifa_c.setText("$ "+l_tarifa_c.getText()+" x "+cont+" recorridos");
             this.Table.setModel(modelo);
-            this.Table.setRowHeight(30);
-            
+            this.Table.setRowHeight(30);      
         } catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error" + e);
         }
@@ -212,15 +209,15 @@ public class DetalleServicio extends javax.swing.JFrame {
                             .addGap(187, 187, 187)
                             .addComponent(jLabel10))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel8))
-                            .addGap(97, 97, 97)
+                            .addGap(41, 41, 41)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel9))
+                            .addGap(90, 90, 90)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(l_tarifa_c)
                                 .addComponent(l_precioP))
-                            .addGap(147, 147, 147)))
+                            .addGap(121, 121, 121)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(266, 266, 266)
                         .addComponent(b_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))

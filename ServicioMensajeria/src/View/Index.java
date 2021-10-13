@@ -32,7 +32,6 @@ public class Index extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        b_mensajero = new javax.swing.JButton();
         b_sol_servicio = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -66,15 +65,6 @@ public class Index extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("BIENVENIDO");
 
-        b_mensajero.setBackground(new java.awt.Color(234, 240, 17));
-        b_mensajero.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        b_mensajero.setText("MENSAJERO");
-        b_mensajero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_mensajeroActionPerformed(evt);
-            }
-        });
-
         b_sol_servicio.setBackground(new java.awt.Color(234, 240, 17));
         b_sol_servicio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         b_sol_servicio.setText("SOLICITAR SERVICIO");
@@ -96,14 +86,11 @@ public class Index extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(b_sol_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(b_mensajero, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(67, 67, 67))))
+                        .addGap(53, 53, 53)
+                        .addComponent(b_sol_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,10 +99,8 @@ public class Index extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addComponent(jLabel2)
-                        .addGap(26, 26, 26)
-                        .addComponent(b_sol_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(b_mensajero, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
+                        .addComponent(b_sol_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel3)))
@@ -139,10 +124,6 @@ public class Index extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void b_mensajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_mensajeroActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_b_mensajeroActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -191,7 +172,6 @@ public class Index extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton b_mensajero;
     private javax.swing.JButton b_sol_servicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
