@@ -35,10 +35,6 @@ public class RegistrarServicio extends javax.swing.JFrame {
         this.fecha = fecha;
     }
 
-    
-
-    
-
     public String getPaquete() {
         return paquete;
     }
