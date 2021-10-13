@@ -84,20 +84,36 @@ public class ServicioDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-    public void DetalleServicio() {
+    
+    public ResultSet DetalleServicio(Servicio servicio) {
         try {
-            String SQL = "SELECT s.k_servicio, s.i_paquete, s.f_servicio, s.h_inicio, m.n_ciudad,m.q_pcomision,t.v_paquete FROM \"Servicio\" s, \"Ciudad\" m,\"Tarifa\" t, \"CiudadTarifa\" ct WHERE t.k_tarifa = ct.k_tarifa AND m.k_cpostal = ct.k_cpostal AND m.k_cpostal = s.k_cpostal AND s.i_paquete = t.i_paquete AND s.k_servicio = ?";
+            String strSQL = "SELECT s.k_servicio, s.i_paquete, s.f_servicio, s.h_inicio, m.n_ciudad,m.q_pcomision,t.v_paquete FROM \"Servicio\" s, \"Ciudad\" m,\"Tarifa\" t, \"CiudadTarifa\" ct WHERE t.k_tarifa = ct.k_tarifa AND m.k_cpostal = ct.k_cpostal AND m.k_cpostal = s.k_cpostal AND s.i_paquete = t.i_paquete AND s.k_servicio = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
-            PreparedStatement stmt = conexion.prepareStatement(SQL);
-            ResultSet rs = stmt.executeQuery(SQL);
+            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setLong(1, Servicio.getKservicio());
+            ResultSet rs = prepStmt.executeQuery(strSQL);
             while (rs.next()) {
-            //holi   
+                servicio.setTipopaquete(rs.getString(2));
+                servicio.setFservicio(rs.getDate(3));
+                servicio.setH_inicio(rs.getString(4));
+                servicio.setCpostal(rs.getString(5));
+                servicio.setPcomision(rs.getFloat(6));
+                servicio.setVpaquete(rs.getFloat(7));
             }
             rs.close();
-            stmt.close();
+            prepStmt.close();
+            
+            strSQL = "SELECT d_indicacion, n_descripcion FROM \"Indicacion\" WHERE k_servicio = ?";
+            //Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            prepStmt = conexion.prepareStatement(strSQL);
+            prepStmt.setLong(1, Servicio.getKservicio());
+            rs = prepStmt.executeQuery(strSQL);
+            
+            return rs;
         }
         catch (Exception e) {
         e.printStackTrace();
+        return null;
         }
     }
 }

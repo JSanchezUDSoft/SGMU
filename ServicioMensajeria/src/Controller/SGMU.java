@@ -13,7 +13,8 @@ import Model.*;
 import View.*;
 import Util.SMException;
 import Util.SesionController;
-import java.util.Date;        
+import java.util.Date; 
+import java.sql.ResultSet;
 
 public class SGMU {
     private LoginDAO loginDAO;
@@ -107,5 +108,10 @@ public class SGMU {
         int result = servicioDAO.registrarIndicacion(servicio);
         
         return result != 0;
+    }
+    
+    public ResultSet DetalleServicio() throws SMException{
+        ResultSet rs = servicioDAO.DetalleServicio(servicio);
+        return rs;
     }
 }

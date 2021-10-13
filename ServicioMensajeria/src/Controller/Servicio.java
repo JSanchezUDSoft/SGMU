@@ -9,6 +9,8 @@ public class Servicio {
     private String          h_inicio;
     //private String iservicio;
     private String          cpostal;
+    private float           pcomision;
+    private float           vpaquete;
     private String          tipdocc;
     private String          numdocc;
     //private String  tipdocm;
@@ -100,5 +102,23 @@ public class Servicio {
 
     public void setDescripcioni(String descripcioni) {
         this.descripcioni = descripcioni;
-    }    
+    } 
+
+    public float getPcomision() {
+        return pcomision;
+    }
+
+    public void setPcomision(float pcomision) {
+        this.pcomision = pcomision;
+    }
+
+    public float getVpaquete() {
+        return vpaquete;
+    }
+
+    public void setVpaquete(float vpaquete) {
+        this.vpaquete = vpaquete;
+    }
+    
+    
 }
